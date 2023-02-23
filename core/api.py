@@ -19,7 +19,6 @@ class Api(Api):
             "status": status,
             "status_code": status_code
         }
-        data["watermark"] = f"GDI datains © {2022}"
         if paginate: data['paginate'] = paginate
         
         return super().make_response(data, *args, **kwargs)
