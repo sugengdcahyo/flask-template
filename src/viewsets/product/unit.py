@@ -25,7 +25,10 @@ class UnitViewsets(Resource):
 
     def post(self,):
         instance = Product(**request.get_json())
-        instance.save()
+        try:
+            instance.save()
+        except BaseException as e:
+            return {"error": e.orig}, 400
 
         return {
             "_id": instance._id,
@@ -60,6 +63,9 @@ class UnitDetail(Resource):
 
     def delete(self, product_id, *args, **kwargs):
         instance = self.instance.query.filter_by(_id=product_id).one_or_none()
-        instance.delete()
+        if instance:
+            instance.delete()
+        else:
+            return {"error": "Data not found."}, 404
 
-        return {"error": "Data deleted."}, 200
+        return {"message": "Data deleted."}, 200
