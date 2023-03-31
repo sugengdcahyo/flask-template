@@ -8,10 +8,13 @@ class Api(Api):
         keys = ["data", "paginate", "status", "status_code"]
         paginate = None
 
-        if data.get("paginate") and data.get("results"):
-            paginate = data["paginate"]
-            data.pop("paginate")
-            data = data.get("results", [])
+        try:
+            if data.get("paginate") and data.get("results"):
+                paginate = data["paginate"]
+                data.pop("paginate")
+                data = data.get("results", [])
+        except:
+            pass
         
         status = "success" if ( status_code >= 200 and status_code < 400 ) else "failed"
         data = {

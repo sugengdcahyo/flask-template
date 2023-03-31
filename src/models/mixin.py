@@ -40,9 +40,17 @@ class Base(db.Model):
             db.session.add(self)
             db.session.commit()
 
+
+    def update(self, validated) -> any:
+        db.session.query(self.__class__).get(self._id)
+        for k, v in validated.items():
+            setattr(self, k, v)
+        db.session.commit()
+
     
     def delete(self):
-        pass
+        db.session.delete(self)
+        db.session.commit()
 
     
     def bulk_save(self, instances):
