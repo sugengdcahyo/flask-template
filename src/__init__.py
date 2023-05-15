@@ -16,6 +16,7 @@ from core import (
     jwt,
 )
 from core.database import *
+from core.seeder import init_cli
 import os
 
 
@@ -29,6 +30,7 @@ def create_app() -> Flask:
     migrate.init_app(app, db)
     jwt.init(app)
     api.init(app)
+    init_cli(app)
 
     return app
 
