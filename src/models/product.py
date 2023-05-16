@@ -13,6 +13,7 @@ class Product(Base):
     __tablename__ = "product_unit"
     name = db.Column(db.String(125), nullable=False, unique=True)
     price = db.Column(db.Float, nullable=False)
+    status = db.Column(db.Boolean, nullable=False, default=True)
     is_active = db.Column(db.Boolean, nullable=False, default=True)
     categories = relationship(
         "Category", 
